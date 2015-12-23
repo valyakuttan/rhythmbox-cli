@@ -1,18 +1,8 @@
+# utils.py
 
-import json
 import functools
 import os
 import os.path
-
-
-def store_as_json(dct, file_name):
-    f = open(file_name, 'w')
-    json.dump(dct, f)
-
-
-def load_from_json(file_name):
-    f = open(file_name, 'r')
-    return json.load(f)
 
 
 def text_hash(text):
@@ -59,8 +49,8 @@ def all_files(path):
         if os.path.isdir(subpath):
             return all_files(subpath)
         elif os.path.isfile(subpath):
-            return [subpath]
+            return (subpath,)
         else:
-            return []
+            return ()
 
     return (f for x in os.listdir(p) for f in to_list(x))

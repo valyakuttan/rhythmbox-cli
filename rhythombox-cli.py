@@ -45,15 +45,16 @@ def write_tracks(tracks):
 
 def main():
     music_path = "~/Music"
-    n = 1934
-    max_records = 5
-    m = 4 + utils.randint() % max_records
-    rands = [utils.randint() % n for _ in range(m)]
 
+    count = 5 + utils.randint() % 5000
     xs = music_files(music_path)
-    count = max(rands) + 1
     files = list(itertools.islice(xs, 0, count))
-    tracks = sorted(files[i] for i in set(rands))
+
+    n = len(files)
+    m = 2 + utils.randint() % 5
+
+    rands = {utils.randint() % n for _ in range(m)}
+    tracks = sorted(files[i] for i in rands)
 
     addtracks(tracks)
     time.sleep(5)
